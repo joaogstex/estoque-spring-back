@@ -13,6 +13,6 @@ import com.gustavo.estoque.model.entity.Produto;
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
         Optional<Produto> findBySku(String sku);
         Optional<Produto> findByNome(String nome);
-        Optional<Categoria> findByCategoriaNome(String categoriaNome);
-        Optional<Fornecedor> findByFornecedorNome(String fornecedorNome);
+        Optional<Categoria> findByCategoria(String categoriaNome);
+        Optional<Fornecedor> findByFornecedor(String fornecedorNome);
 }
