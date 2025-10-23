@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -22,8 +23,11 @@ public class Produto {
     private String descricao;
     private BigDecimal preco;
     private Integer quantidadeEstoque;
-    @Column(name = "categoria_id")  
+    
+    @Column(name = "id_categoria")  
+    @ManyToOne
     private Categoria categoria;
-    @Column(name = "fornecedor_id")
+    @Column(name = "id_fornecedor")
+    @ManyToOne
     private Fornecedor fornecedor;
 }
