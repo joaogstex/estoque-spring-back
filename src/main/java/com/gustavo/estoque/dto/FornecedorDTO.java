@@ -5,7 +5,7 @@ import com.gustavo.estoque.enums.UF;
 import com.gustavo.estoque.model.entity.Fornecedor;
 
 public record FornecedorDTO(String nome, String cnpj, String telefone, 
-String email, StatusFornecedor status, UF uf) {
+String email, StatusFornecedor status, UF uf, String cidade) {
 
     public FornecedorDTO convertToDto(Fornecedor fornecedor) {
         return new FornecedorDTO(
@@ -14,7 +14,8 @@ String email, StatusFornecedor status, UF uf) {
             fornecedor.getTelefone(),
             fornecedor.getEmail(),
             fornecedor.getStatus(),
-            fornecedor.getUf()
+            fornecedor.getUf(),
+            fornecedor.getCidade()
         );
     }
 }

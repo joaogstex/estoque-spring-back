@@ -40,4 +40,7 @@ public class Fornecedor {
 
     @Column(name = "uf_fornecedor")
     private UF uf;
+
+    @Column(name = "cidade_fornecedor")
+    private String cidade;
 }
