@@ -30,7 +30,7 @@ public class ProdutoService implements ProdutoServiceImpl{
 
     @Override 
     public List<Produto> listarProdutosAtivos() {
-        return produtoRepository.findByAtivo(StatusProduto.ATIVO).stream().toList();
+        return produtoRepository.findByStatus(StatusProduto.ATIVO).stream().toList();
     }
 
     @Override 

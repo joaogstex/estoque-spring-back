@@ -1,5 +1,9 @@
 package com.gustavo.estoque.model.entity;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,4 +23,8 @@ public class Categoria {
     
     @Column(name = "nome_categoria", length = 120)
     private String nome;
+
+    @CreationTimestamp
+    @Column(name = "data_criacao")
+    private LocalDateTime dataCriacao;
 }

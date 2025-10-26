@@ -1,14 +1,15 @@
 services:
   postgres:
-    image: postgres:18-alpine
+    image: postgres:latest
     container_name: estoque_postgres
     environment:
       POSTGRES_USER: joaogstex
       POSTGRES_PASSWORD: euAmoAndressaEStarWars
       POSTGRES_DB: estoque_db
-      ports:
-        - "5432:5432"
-      volumes:
-        - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
 volumes:
   postgres_data:

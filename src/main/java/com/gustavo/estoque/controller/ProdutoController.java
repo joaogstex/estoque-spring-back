@@ -18,7 +18,7 @@ import com.gustavo.estoque.service.ProdutoService;
 @RestController
 @RequestMapping("/produtos")
 public class ProdutoController {
-    
+
     private final ProdutoService produtoService;
 
     public ProdutoController(ProdutoService produtoService) {

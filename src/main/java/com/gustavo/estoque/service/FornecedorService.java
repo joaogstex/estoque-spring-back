@@ -30,7 +30,7 @@ public class FornecedorService implements FornecedorServiceImpl{
 
     @Override 
     public List<Fornecedor> listarFornecedoresAtivos() {
-        return fornecedorRepository.findByAtivo(StatusFornecedor.ATIVO).stream().toList();
+        return fornecedorRepository.findByStatus(StatusFornecedor.ATIVO).stream().toList();
     }
 
     @Override

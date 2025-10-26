@@ -1,14 +1,20 @@
 package com.gustavo.estoque.model.entity;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.gustavo.estoque.enums.StatusProduto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -38,12 +44,17 @@ public class Produto {
     private Integer quantidadeEstoque;
 
     @Column(name = "status_produto")
+    @Enumerated(EnumType.ORDINAL)
     private StatusProduto status;
 
-    @Column(name = "id_categoria")  
+    @CreationTimestamp
+    @Column(name = "data_criacao")
+    private LocalDateTime dataCriacao;
+
+    @JoinColumn(name = "id_categoria")  
     @ManyToOne
     private Categoria categoria;
-    @Column(name = "id_fornecedor")
+    @JoinColumn(name = "id_fornecedor")
     @ManyToOne
     private Fornecedor fornecedor;
 }
