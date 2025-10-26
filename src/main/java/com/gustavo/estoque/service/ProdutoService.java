@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.gustavo.estoque.dto.ProdutoDTO;
 import com.gustavo.estoque.enums.StatusProduto;
 import com.gustavo.estoque.model.entity.Produto;
 import com.gustavo.estoque.repository.ProdutoRepository;
@@ -19,47 +20,55 @@ public class ProdutoService implements ProdutoServiceImpl{
     }
 
     @Override
-    public Produto salvarProduto(Produto produto) {
-        return produtoRepository.save(produto);
+    public ProdutoDTO salvarProduto(Produto produto) {
+        Produto salvar = produtoRepository.save(produto);
+        return ProdutoDTO.convertToDto(salvar);
     }
 
     @Override
-    public List<Produto> listarProdutos() {
-        return produtoRepository.findAll();
+    public List<ProdutoDTO> listarProdutos() {
+        List<Produto> listar = produtoRepository.findAll();
+        return ProdutoDTO.convertToDto(listar);
     }
 
     @Override 
-    public List<Produto> listarProdutosAtivos() {
-        return produtoRepository.findByStatus(StatusProduto.ATIVO).stream().toList();
+    public List<ProdutoDTO> listarProdutosAtivos() {
+        List<Produto> listarAtivos = produtoRepository.findByStatus(StatusProduto.ATIVO).stream().toList();
+        return ProdutoDTO.convertToDto(listarAtivos);
     }
 
     @Override 
-    public Produto buscarProdutoPorId(Long id) {
-        return produtoRepository.findById(id).orElseThrow(() -> 
+    public ProdutoDTO buscarProdutoPorId(Long id) {
+        Produto buscarProdPorId = produtoRepository.findById(id).orElseThrow(() -> 
         new RuntimeException("Produto não encontrado"));
+        return ProdutoDTO.convertToDto(buscarProdPorId);
     }
 
     @Override
-    public Produto buscarProdutoPorSku(String sku) {
-        return produtoRepository.findBySku(sku).orElseThrow(() -> 
+    public ProdutoDTO buscarProdutoPorSku(String sku) {
+        Produto buscarProdPorSku = produtoRepository.findBySku(sku).orElseThrow(() -> 
         new RuntimeException("Produto não encontrado"));
+        return ProdutoDTO.convertToDto(buscarProdPorSku);
     }
 
     @Override
-    public List<Produto> buscarProdutosPorCategoria(Long categoriaId) {
-        return produtoRepository.findByCategoriaId(categoriaId).stream().filter(produto -> 
+    public List<ProdutoDTO> buscarProdutosPorCategoria(Long categoriaId) {
+        List<Produto> buscarProdsPorCategoria = produtoRepository.findByCategoriaId(categoriaId).stream().filter(produto -> 
         produto.getCategoria().getId().equals(categoriaId)).toList();
+        return ProdutoDTO.convertToDto(buscarProdsPorCategoria);
     }
 
     @Override 
-    public List<Produto> buscarProdutosPorFornecedor(Long fornecedorId) {
-        return produtoRepository.findByFornecedorId(fornecedorId).stream().filter(produto ->
+    public List<ProdutoDTO> buscarProdutosPorFornecedor(Long fornecedorId) {
+        List<Produto> buscarProsPorFornecedor = produtoRepository.findByFornecedorId(fornecedorId).stream().filter(produto ->
         produto.getFornecedor().getId().equals(fornecedorId)).toList();
+        return ProdutoDTO.convertToDto(buscarProsPorFornecedor);
     }
 
     @Override
-    public Produto atualizarProduto(Produto produto, Long id) {
-        Produto produtoExistente = buscarProdutoPorId(id);
+    public ProdutoDTO atualizarProduto(Produto produto, Long id) {
+        Produto produtoExistente = produtoRepository.findById(id).orElseThrow(() -> 
+        new RuntimeException("Produto não encontrado"));
         produtoExistente.setNome(produto.getNome());
         produtoExistente.setDescricao(produto.getDescricao());
         produtoExistente.setPreco(produto.getPreco());
@@ -67,13 +76,15 @@ public class ProdutoService implements ProdutoServiceImpl{
         produtoExistente.setStatus(produto.getStatus());
         produtoExistente.setCategoria(produto.getCategoria());
         produtoExistente.setFornecedor(produto.getFornecedor());
-        return produtoRepository.save(produtoExistente);
+        Produto produtoAtualizado = produtoRepository.save(produtoExistente);
+        return ProdutoDTO.convertToDto(produtoAtualizado);
     }
 
     @Override 
-    public Produto deletarProduto(Long id) {
-        Produto produtoExistente = buscarProdutoPorId(id);
+    public ProdutoDTO deletarProduto(Long id) {
+        Produto produtoExistente = produtoRepository.findById(id).orElseThrow(() -> 
+        new RuntimeException("Produto não encontrado"));
         produtoRepository.delete(produtoExistente);
-        return produtoExistente;
+        return ProdutoDTO.convertToDto(produtoExistente);
     }
 }

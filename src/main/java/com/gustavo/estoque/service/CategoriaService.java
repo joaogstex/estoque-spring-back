@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.gustavo.estoque.dto.CategoriaDTO;
 import com.gustavo.estoque.model.entity.Categoria;
 import com.gustavo.estoque.repository.CategoriaRepository;
 import com.gustavo.estoque.service.impl.CategoriaServiceImpl;
@@ -18,28 +19,31 @@ public class CategoriaService implements CategoriaServiceImpl{
     }
 
     @Override
-    public Categoria salvarCategoria(Categoria categoria) {
-        return categoriaRepository.save(categoria);
+    public CategoriaDTO salvarCategoria(Categoria categoria) {
+        Categoria salvar = categoriaRepository.save(categoria);
+        return CategoriaDTO.convertToDto(salvar);
     }
 
     @Override 
-    public List<Categoria> listarCategorias() {
-        return categoriaRepository.findAll();
+    public List<CategoriaDTO> listarCategorias() {
+        List<Categoria> listar = categoriaRepository.findAll();
+        return CategoriaDTO.convertToDto(listar);
     }
 
     @Override
-    public Categoria atualizarCategoria(Categoria categoria, Long id) {
+    public CategoriaDTO atualizarCategoria(Categoria categoria, Long id) {
         Categoria categoriaExistente = categoriaRepository.findById(id).orElseThrow(() ->
         new RuntimeException("Id de categoria não encontrado"));
         categoriaExistente.setNome(categoria.getNome());
-        return categoriaRepository.save(categoriaExistente);
+        Categoria categoriaAtualizada = categoriaRepository.save(categoriaExistente);
+        return CategoriaDTO.convertToDto(categoriaAtualizada);
     }
 
     @Override
-    public Categoria deletarCategoria(Long id) {
+    public CategoriaDTO deletarCategoria(Long id) {
         Categoria categoriaExistente = categoriaRepository.findById(id).orElseThrow(() ->
         new RuntimeException("Id de categoria não encontrado"));
         categoriaRepository.delete(categoriaExistente);
-        return categoriaExistente;
+        return CategoriaDTO.convertToDto(categoriaExistente);
     }
 }

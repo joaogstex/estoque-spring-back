@@ -2,19 +2,20 @@ package com.gustavo.estoque.service.impl;
 
 import java.util.List;
 
+import com.gustavo.estoque.dto.ProdutoDTO;
 import com.gustavo.estoque.model.entity.Produto;
 
 public interface ProdutoServiceImpl {
-    Produto salvarProduto(Produto produto);
+    ProdutoDTO salvarProduto(Produto produto);
 
-    List<Produto> listarProdutos();
-    List<Produto> listarProdutosAtivos();
+    List<ProdutoDTO> listarProdutos();
+    List<ProdutoDTO> listarProdutosAtivos();
 
-    Produto buscarProdutoPorId(Long id);
-    Produto buscarProdutoPorSku(String sku);
-    List<Produto> buscarProdutosPorCategoria(Long categoriaId);
-    List<Produto> buscarProdutosPorFornecedor(Long fornecedorId);
+    ProdutoDTO buscarProdutoPorId(Long id);
+    ProdutoDTO buscarProdutoPorSku(String sku);
+    List<ProdutoDTO> buscarProdutosPorCategoria(Long categoriaId);
+    List<ProdutoDTO> buscarProdutosPorFornecedor(Long fornecedorId);
 
-    Produto atualizarProduto(Produto produto, Long id);
-    Produto deletarProduto(Long id);
+    ProdutoDTO atualizarProduto(Produto produto, Long id);
+    ProdutoDTO deletarProduto(Long id);
 }

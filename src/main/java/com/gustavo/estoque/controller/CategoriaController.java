@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gustavo.estoque.dto.CategoriaDTO;
 import com.gustavo.estoque.model.entity.Categoria;
 import com.gustavo.estoque.service.CategoriaService;
 
@@ -26,22 +27,26 @@ public class CategoriaController {
     }
 
     @PostMapping("/criar/categoria")
-    public ResponseEntity<Categoria> criarCategoria(@RequestBody Categoria categoria) {
-        return ResponseEntity.ok(categoriaService.salvarCategoria(categoria));
+    public ResponseEntity<CategoriaDTO> criarCategoria(@RequestBody Categoria categoria) {
+        CategoriaDTO dto = categoriaService.salvarCategoria(categoria);
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/listar/categorias")
-    public ResponseEntity<List<Categoria>> listarCategorias() {
-        return ResponseEntity.ok(categoriaService.listarCategorias());
+    public ResponseEntity<List<CategoriaDTO>> listarCategorias() {
+        List<CategoriaDTO> dto = categoriaService.listarCategorias();
+        return ResponseEntity.ok(dto);
     }
 
     @PutMapping("/atualizar/categoria/id/{id}")
-    public ResponseEntity<Categoria> atualizarCategoria(@RequestBody Categoria categoria, @PathVariable Long id) {
-        return ResponseEntity.ok(categoriaService.atualizarCategoria(categoria, id));
+    public ResponseEntity<CategoriaDTO> atualizarCategoria(@RequestBody Categoria categoria, @PathVariable Long id) {
+        CategoriaDTO dto = categoriaService.atualizarCategoria(categoria, id);
+        return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/deletar/categoria/id/{id}")
-    public ResponseEntity<Categoria> deletarCategoria(@PathVariable Long id) {
-        return ResponseEntity.ok(categoriaService.deletarCategoria(id));
+    public ResponseEntity<CategoriaDTO> deletarCategoria(@PathVariable Long id) {
+        CategoriaDTO dto = categoriaService.deletarCategoria(id);
+        return ResponseEntity.ok(dto);
     }
 }

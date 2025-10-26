@@ -2,11 +2,12 @@ package com.gustavo.estoque.service.impl;
 
 import java.util.List;
 
+import com.gustavo.estoque.dto.CategoriaDTO;
 import com.gustavo.estoque.model.entity.Categoria;
 
 public interface CategoriaServiceImpl {
-    Categoria salvarCategoria(Categoria categoria);
-    List<Categoria> listarCategorias();
-    Categoria atualizarCategoria(Categoria categoria, Long id);
-    Categoria deletarCategoria(Long id);
+    CategoriaDTO salvarCategoria(Categoria categoria);
+    List<CategoriaDTO> listarCategorias();
+    CategoriaDTO atualizarCategoria(Categoria categoria, Long id);
+    CategoriaDTO deletarCategoria(Long id);
 }

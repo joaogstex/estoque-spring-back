@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gustavo.estoque.dto.ProdutoDTO;
 import com.gustavo.estoque.model.entity.Produto;
 import com.gustavo.estoque.service.ProdutoService;
 
@@ -26,47 +27,56 @@ public class ProdutoController {
     }
 
     @PostMapping("/criar/produto")
-    public ResponseEntity<Produto> criarProduto(@RequestBody Produto produto) {
-        return ResponseEntity.ok(produtoService.salvarProduto(produto));
+    public ResponseEntity<ProdutoDTO> criarProduto(@RequestBody Produto produto) {
+        ProdutoDTO dto = produtoService.salvarProduto(produto);
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/listar/produtos")
-    public ResponseEntity<List<Produto>> listarProdutos() {
-        return ResponseEntity.ok(produtoService.listarProdutos());
+    public ResponseEntity<List<ProdutoDTO>> listarProdutos() {
+        List<ProdutoDTO> dto = produtoService.listarProdutos();
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/listar/produtos/ativos")
-    public ResponseEntity<List<Produto>> listarProdutosAtivos() {
-        return ResponseEntity.ok(produtoService.listarProdutosAtivos());
+    public ResponseEntity<List<ProdutoDTO>> listarProdutosAtivos() {
+        List<ProdutoDTO> dto = produtoService.listarProdutosAtivos();
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/buscar/produtos/id/{id}")
-    public ResponseEntity<Produto> buscarProdutoPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(produtoService.buscarProdutoPorId(id));
+    public ResponseEntity<ProdutoDTO> buscarProdutoPorId(@PathVariable Long id) {
+        ProdutoDTO dto = produtoService.buscarProdutoPorId(id);
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/buscar/produtos/sku/{sku}")
-    public ResponseEntity<Produto> buscarProdutoPorSku(@PathVariable String sku) {
-        return ResponseEntity.ok(produtoService.buscarProdutoPorSku(sku));
+    public ResponseEntity<ProdutoDTO> buscarProdutoPorSku(@PathVariable String sku) {
+        ProdutoDTO dto = produtoService.buscarProdutoPorSku(sku);
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/buscar/produtos/categoria/{categoriaId}")
-    public ResponseEntity<List<Produto>> buscarProdutosPorCategoria(@PathVariable Long categoriaId) {
-        return ResponseEntity.ok(produtoService.buscarProdutosPorCategoria(categoriaId));
+    public ResponseEntity<List<ProdutoDTO>> buscarProdutosPorCategoria(@PathVariable Long categoriaId) {
+        List<ProdutoDTO> dto = produtoService.buscarProdutosPorCategoria(categoriaId);
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/buscar/produtos/fornecedor/{fornecedorId}")
-    public ResponseEntity<List<Produto>> buscarProdutosPorFornecedor(@PathVariable Long fornecedorId) {
-        return ResponseEntity.ok(produtoService.buscarProdutosPorFornecedor(fornecedorId));
+    public ResponseEntity<List<ProdutoDTO>> buscarProdutosPorFornecedor(@PathVariable Long fornecedorId) {
+        List<ProdutoDTO> dto = produtoService.buscarProdutosPorFornecedor(fornecedorId);
+        return ResponseEntity.ok(dto);
     }
 
     @PutMapping("/atualizar/produto/{id}")
-    public ResponseEntity<Produto> atualizarProduto(@RequestBody Produto produto, @PathVariable Long id) {
-        return ResponseEntity.ok(produtoService.atualizarProduto(produto, id));
+    public ResponseEntity<ProdutoDTO> atualizarProduto(@RequestBody Produto produto, @PathVariable Long id) {
+        ProdutoDTO dto = produtoService.atualizarProduto(produto, id);
+        return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/deletar/produto/{id}")
-    public ResponseEntity<Produto> deletarProduto(@PathVariable Long id) {
-        return ResponseEntity.ok(produtoService.deletarProduto(id));
+    public ResponseEntity<ProdutoDTO> deletarProduto(@PathVariable Long id) {
+        ProdutoDTO dto = produtoService.deletarProduto(id);
+        return ResponseEntity.ok(dto);
     }
 }
